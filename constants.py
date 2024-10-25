@@ -6,7 +6,7 @@ except ImportError:
 from faster_whisper import WhisperModel
 from fastapi.security import HTTPBearer
 # Determine device based on availability
-if torch is not None:
+if torch is not None and 0:
     device = "cpu" if os.getenv("FORCE_CPU", "false").lower() == "true" else ("cuda" if torch.cuda.is_available() else "cpu")
 else:
     device = "cpu"
