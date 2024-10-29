@@ -7,13 +7,13 @@ from faster_whisper import WhisperModel
 from fastapi.security import HTTPBearer
 # Determine device based on availability
 # danx0r: cuda not working but lib is fast cpu only so disable gpu
-#if torch is not None:
-if False:
+if torch is not None:
+#if False:
     device = "cpu" if os.getenv("FORCE_CPU", "false").lower() == "true" else ("cuda" if torch.cuda.is_available() else "cpu")
 else:
-    device = "cpu"
+    device = "cuda"
 # Determine the compute type based on the device
-compute_type = "float16" if device == "cuda" else "int8"
+compute_type = "float32" if device == "cuda" else "int8"
 
 # Preload the base model
 model = WhisperModel("base", device=device, compute_type=compute_type)
